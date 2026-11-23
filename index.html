@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Phenaeus Walter F. Gavilla — IT Student</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+      --bg: #efe6d6;
+      --fg: #2e2419;
+      --muted: #7a6a56;
+      --line: #d8c8ad;
+      --accent: #a0623a;
+      --card: #e6d9c3;
+    --serif: "Inter", system-ui, sans-serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; width: 100%; }
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+  .logo { font-family: var(--serif); font-weight: 700; font-size: 20px; letter-spacing: -.01em; text-decoration: none; white-space: nowrap; }
+  nav ul { display: flex; gap: 4px; list-style: none; margin-left: auto; }
+  nav ul a { display: block; text-decoration: none; font-size: 14px; color: var(--muted); padding: 6px 12px; border-radius: 999px; transition: background .15s, color .15s; }
+  nav ul a:hover { color: var(--fg); }
+  nav ul a[aria-current="page"] { background: var(--fg); color: var(--bg); }
+  .status { display: none; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #2f9e55; box-shadow: 0 0 0 4px #2f9e5522; }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--fg); background: transparent; color: var(--fg); cursor: pointer; transition: transform .15s; }
+  .btn.primary { background: var(--fg); color: var(--bg); }
+  .btn:hover { transform: translateY(-1px); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  [tabindex="-1"]:focus { outline: none; }
+
+  main { flex: 1; }
+  .page { animation: fade .35s ease; }
+  .page[hidden] { display: none; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .page-head { padding: 72px 0 48px; border-bottom: 1px solid var(--line); }
+  .page-head h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(48px, 8vw, 104px); line-height: .95; letter-spacing: -.02em; margin-top: 16px; }
+  .page-head h1 em { color: var(--accent); }
+  .page-head .sub { font-size: 18px; color: var(--muted); max-width: 48ch; margin-top: 24px; }
+
+  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  section:last-child { border-bottom: 0; }
+  .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+  .sec-head h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5vw, 52px); line-height: 1; margin-top: 8px; }
+  .link { font-size: 14px; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .link:hover { color: var(--accent); }
+
+  /* Home */
+  .intro { display: flex; flex-direction: column-reverse; gap: 40px; padding: 72px 24px 88px; }
+  .intro h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(44px, 7vw, 88px); line-height: .98; letter-spacing: -.02em; max-width: 14ch; margin-top: 16px; }
+  .intro h1 em { color: var(--accent); }
+  .intro-bio { font-size: 18px; color: var(--muted); max-width: 52ch; margin-top: 24px; }
+  .intro-bio strong { color: var(--fg); font-weight: 500; }
+  .facts { list-style: none; display: flex; flex-wrap: wrap; gap: 24px 40px; margin: 36px 0; padding-top: 20px; border-top: 1px solid var(--line); }
+  .facts li { display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+  .intro-portrait { width: 100%; max-width: 320px; aspect-ratio: 4/5; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
+  .intro-portrait svg, .intro-portrait img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .hero { padding: 88px 0 64px; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(52px, 10vw, 132px); line-height: .92; letter-spacing: -.02em; max-width: 12ch; margin-top: 16px; }
+  .hero h1 em { color: var(--accent); }
+  .hero-foot { display: flex; flex-direction: column; gap: 24px; margin-top: 48px; }
+  .hero-foot p { font-size: 18px; max-width: 46ch; color: var(--muted); }
+  .hero-foot p strong { color: var(--fg); font-weight: 500; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .clients { display: flex; flex-wrap: wrap; gap: 12px 40px; align-items: center; }
+  .clients span { font-family: var(--serif); font-size: 26px; color: var(--muted); }
+  .services { display: grid; grid-template-columns: 1fr; gap: 0; list-style: none; }
+  .services li { padding: 28px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+  .services h3 { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.1; }
+  .services p { color: var(--muted); font-size: 15px; max-width: 40ch; }
+
+  /* Projects */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filters button { font: inherit; font-size: 13px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+  .filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+  .project { display: flex; flex-direction: column; gap: 14px; text-decoration: none; }
+  .project[hidden] { display: none; }
+  .thumb { aspect-ratio: 4/3; border-radius: 12px; overflow: hidden; }
+    .thumb .art { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+    .thumb { background: #fff; }
+    .thumb .art.contain { object-fit: contain; transform-origin: center; }
+     .project:hover .art { transform: scale(1.04); }
+  .meta { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .meta h3 { font-size: 18px; font-weight: 500; }
+  .meta p { font-size: 14px; color: var(--muted); }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; list-style: none; }
+  .tags li { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--card); color: var(--muted); }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  .portrait { aspect-ratio: 4/5; border-radius: 12px; overflow: hidden; background: var(--card); }
+  .portrait svg, .portrait img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .about p.lead { font-family: var(--serif); font-size: clamp(26px, 3.4vw, 38px); line-height: 1.2; }
+  .about p.body { color: var(--muted); font-size: 16px; margin-top: 20px; max-width: 56ch; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .stats div { border-top: 1px solid var(--fg); padding-top: 12px; }
+  .stats b { display: block; font-family: var(--serif); font-weight: 600; font-size: 44px; line-height: 1; }
+  .stats span { font-size: 13px; color: var(--muted); }
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+  .skills li { font-size: 14px; padding: 8px 14px; border-radius: 999px; background: var(--card); }
+  .xp { list-style: none; }
+  .xp li { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 24px 0; border-top: 1px solid var(--line); }
+  .xp li:last-child { border-bottom: 1px solid var(--line); }
+  .xp h3 { font-size: 18px; font-weight: 500; }
+  .xp p { color: var(--muted); font-size: 15px; }
+  .info { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); }
+  .info div { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .info dt { color: var(--muted); font-size: 14px; }
+  .info dd { font-size: 16px; font-weight: 500; text-align: right; }
+  @media (min-width: 720px) { .info { grid-template-columns: 1fr 1fr; column-gap: 48px; } }
+
+  /* Contact */
+  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 56px; }
+  .big { display: inline-block; font-family: var(--serif); font-weight: 600; letter-spacing: -.02em; font-size: clamp(32px, 5vw, 56px); line-height: 1.05; text-decoration: none; border-bottom: 2px solid var(--fg); word-break: break-word; transition: color .2s, border-color .2s; }
+  .big:hover { color: var(--accent); border-color: var(--accent); }
+  .info { list-style: none; margin-top: 40px; }
+  .info li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); font-size: 15px; }
+  .info li:last-child { border-bottom: 1px solid var(--line); }
+  .info a { text-decoration: none; }
+  .info a:hover { color: var(--accent); }
+  form { display: flex; flex-direction: column; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label, .field legend { font-size: 13px; font-weight: 500; }
+  .field input, .field textarea { font: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #f7f0e4; color: var(--fg); }
+  .field input:focus, .field textarea:focus { outline: 2px solid var(--fg); outline-offset: 0; border-color: var(--fg); }
+  .field textarea { min-height: 140px; resize: vertical; }
+  fieldset.field { border: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips label { cursor: pointer; }
+  .chips input { position: absolute; opacity: 0; pointer-events: none; }
+  .chips span { display: inline-block; font-size: 13px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .chips input:checked + span { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .chips input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .form-note { font-size: 13px; color: var(--muted); }
+  .sent { padding: 24px; border-radius: 12px; background: var(--card); }
+  .sent h3 { font-family: var(--serif); font-weight: 600; font-size: 32px; }
+
+  footer { border-top: 1px solid var(--line); }
+  footer .wrap { padding-top: 28px; padding-bottom: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (min-width: 720px) {
+    .status { display: flex; }
+    .intro { flex-direction: row; align-items: center; justify-content: space-between; gap: 64px; padding-top: 96px; padding-bottom: 112px; min-height: calc(100vh - 64px - 90px); }
+    .intro-portrait { max-width: 360px; }
+    .hero-foot { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 48px 32px; }
+    .grid.three { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .services { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .about { grid-template-columns: 1fr 1.4fr; gap: 64px; }
+    .xp li { grid-template-columns: 160px 1fr 1.4fr; gap: 24px; align-items: baseline; }
+    .contact-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
+  }
+  @media (max-width: 480px) {
+    nav { height: auto; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+    nav ul { width: 100%; justify-content: space-between; }
+    nav ul a { padding: 6px 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, .page { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <nav class="wrap" aria-label="Primary">
+    <a href="#home" class="logo">Phenaeus Gavilla</a>
+    <ul>
+      <li><a href="#home" data-link="home">Home</a></li>
+      <li><a href="#about" data-link="about">About</a></li>
+      <li><a href="#projects" data-link="projects">Projects</a></li>
+      <li><a href="#contact" data-link="contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- HOME -->
+  <div class="page" id="page-home" data-page="home">
+    <div class="intro wrap">
+      <div class="intro-text">
+              <h1 tabindex="-1">Hello, I&apos;m <em>Walter.</em></h1>
+        <p class="intro-bio">I&apos;m an IT student who enjoys building things for the web and learning how technology can solve everyday problems. I&apos;m always looking to grow my skills in programming, design, and systems.</p>
+        <div class="cta">
+          <a class="btn primary" href="#about">More about me →</a>
+        </div>
+      </div>
+      <div class="intro-portrait">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/me-P74FfM902oPaKv74WDVRLT76dr8wcV.jpg" alt="Portrait of Phenaeus Walter F. Gavilla" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="page" id="page-about" data-page="about" hidden>
+    <div class="page-head wrap">
+      <h1 tabindex="-1">About <em>me.</em></h1>
+    </div>
+
+    <section class="wrap">
+      <div class="about">
+        <div class="portrait">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/me-P74FfM902oPaKv74WDVRLT76dr8wcV.jpg" alt="Portrait of Phenaeus Walter F. Gavilla" />
+        </div>
+        <div>
+          <p class="lead">I&apos;m Phenaeus Walter F. Gavilla, an Information Technology student who likes understanding how things work and then building them myself.</p>
+          <p class="body">My interest in IT started with curiosity about computers and grew into a passion for programming, web development, and problem solving. In school, I&apos;ve worked on projects that taught me how to plan, code, test, and collaborate with a team.</p>
+          <p class="body">I&apos;m currently strengthening my skills in back-end development, databases, and networking, and I&apos;m looking for opportunities to learn from real-world projects.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="skills-h">
+      <div class="sec-head"><div><p class="mono">Toolkit</p><h2 id="skills-h">Skills</h2></div></div>
+      <ul class="skills">
+        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Python</li><li>Java</li><li>SQL / MySQL</li><li>Git &amp; GitHub</li><li>Networking basics</li><li>Troubleshooting</li><li>Teamwork</li>
+      </ul>
+    </section>
+
+    <section class="wrap" aria-labelledby="xp-h">
+      <div class="sec-head"><div><p class="mono">Details</p><h2 id="xp-h">Personal information</h2></div></div>
+      <dl class="info">
+        <div><dt>Full name</dt><dd>Phenaeus Walter F. Gavilla</dd></div>
+        <div><dt>Nickname</dt><dd>Walter</dd></div>
+        <div><dt>Course</dt><dd>BS Information Technology</dd></div>
+        <div><dt>Status</dt><dd>Student</dd></div>
+  <div><dt>School</dt><dd>University of San Agustin</dd></div>
+  <div><dt>Hobbies</dt><dd>Playing video games, coding, reading</dd></div>
+      </dl>
+      <div class="cta" style="margin-top:40px"><a class="btn primary" href="#contact">Get in touch →</a></div>
+    </section>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="page" id="page-projects" data-page="projects" hidden>
+    <div class="page-head wrap">
+          <h1 tabindex="-1">Things I&apos;ve <em>made.</em></h1>
+      <p class="sub">A selection of product, brand, and development work from the last three years.</p>
+    </div>
+    <section class="wrap" aria-label="Project list">
+      <div class="sec-head">
+        <p class="mono" id="count" aria-live="polite"></p>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button aria-pressed="true" data-f="all">All</button>
+          <button aria-pressed="false" data-f="app">App</button>
+          <button aria-pressed="false" data-f="animation">Animation</button>
+          <button aria-pressed="false" data-f="video">Video</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="page" id="page-contact" data-page="contact" hidden>
+    <div class="page-head wrap">
+      <h1 tabindex="-1">Contact <em>me.</em></h1>
+    </div>
+    <section class="wrap">
+      <ul class="info" style="margin-top:0;max-width:720px">
+        <li><span class="mono">Email</span><a href="mailto:pgavilla@usa.edu.ph">pgavilla@usa.edu.ph</a></li>
+        <li><span class="mono">Facebook</span><a href="https://facebook.com/phenaeuswalter.gavilla" target="_blank" rel="noopener">phenaeuswalter.gavilla ↗</a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© 2026 Phenaeus Walter F. Gavilla</span>
+    <span class="mono" id="clock"></span>
+  </div>
+</footer>
+
+<script>
+  const projects = [
+    { t: "Mindful Minute", d: "An anti-doom-scrolling application that locks the app and gives you one-minute activities.", c: "app", tags: ["App"], img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mindfulminute-ZVJmOR8QLlw9ZB98p8ru4n6WfpA7sF.jpg", alt: "Mindful Minute logo: a person on a bed looking at a glowing phone inside a blue circle", fit: "contain" },
+    { t: "The Forgotten Assignment", d: "It's about a student who forgot his homework and tries to cram it. We then made a video about it.", c: "video", tags: ["Storyboard", "Video"], img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TheForgottenAssignment-6dHki1jNscGDAm3TRJTSzHToplSLxV.jpg", alt: "Eight-panel storyboard of a student rushing to finish a forgotten assignment" },
+    { t: "Bounce Ball", d: "An animation I made in Adobe where a ball goes up and down.", c: "animation", tags: ["Adobe", "Animation"], img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ball_bounce-pmIXx10GRXBPP1BHoYytlry7AcFXsD.gif", alt: "Animation of a light blue ball bouncing on a white background" },
+    { t: "Campus Vox Pop", d: "We first interviewed two students about the news, and edited it like a news anchor.", c: "video", tags: ["Interview", "Video"], img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Vwu0gmTc00jEM4exejaqQ7xheyUhxn.png", alt: "A student holding a phone to interview another student at the University of San Agustin" },
+    { t: "Stop Motion", d: "A stop-motion clip of opening a pack of crackers, shot frame by frame.", c: "animation", tags: ["Stop motion"], img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-6AzpBGafad1miCmcNew4pbqXSq6tbU.png", alt: "Hands pulling crackers out of a yellow pack on a teal chair" },
+    { t: "Pig Getting Slain", d: "An animation of a knight with a sword facing a pig that floats down on a parachute.", c: "animation", tags: ["Animation"], img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Animation-2%282%29.gif-3TnYUGpVzJChuzihAgaFh9LYRdrZXA.webp", alt: "Animation of a cartoon knight holding a sword and a pig on a parachute in a blocky grass field" }
+  ];
+
+  const art = p => p.crop
+    ? `<div class="art crop" role="img" aria-label="${p.alt}"></div>`
+    : `<img class="art${p.fit === "contain" ? " contain" : ""}" src="${p.img}" alt="${p.alt}" loading="lazy" crossorigin="anonymous" />`;
+  const card = (p, withTags) => `
+    <a class="project" href="#projects" data-c="${p.c}">
+      <div class="thumb">${art(p)}</div>
+      <div class="meta"><div><h3>${p.t}</h3><p>${p.d}</p></div></div>
+      ${withTags ? `<ul class="tags" aria-label="Tags">${p.tags.map(t=>`<li>${t}</li>`).join("")}</ul>` : ""}
+    </a>`;
+
+  const grid = document.getElementById("grid");
+  grid.innerHTML = projects.map(p => card(p, true)).join("");
+  const count = document.getElementById("count");
+  const setCount = n => count.textContent = `${n} project${n === 1 ? "" : "s"}`;
+  setCount(projects.length);
+
+  document.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".filters button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    let n = 0;
+    grid.querySelectorAll(".project").forEach(el => { const show = b.dataset.f === "all" || el.dataset.c === b.dataset.f; el.hidden = !show; n += show; });
+    setCount(n);
+  }));
+
+  const pages = ["home", "about", "projects", "contact"];
+  const titles = { home: "Phenaeus Walter F. Gavilla — IT Student", about: "About — Phenaeus Gavilla", projects: "Projects — Phenaeus Gavilla", contact: "Contact — Phenaeus Gavilla" };
+  let first = true;
+  function route(target) {
+    const hash = typeof target === "string" ? target : location.hash.slice(1);
+    const id = pages.includes(hash) ? hash : "home";
+    document.querySelectorAll("[data-page]").forEach(p => p.hidden = p.dataset.page !== id);
+    document.querySelectorAll("[data-link]").forEach(a => a.dataset.link === id ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+    document.title = titles[id];
+    window.scrollTo(0, 0);
+    if (!first) document.querySelector(`#page-${id} h1`).focus({ preventScroll: true });
+    first = false;
+  }
+  document.addEventListener("click", e => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const id = link.getAttribute("href").slice(1);
+    if (!pages.includes(id)) return;
+    e.preventDefault();
+    try { history.replaceState(null, "", "#" + id); } catch {}
+    route(id);
+  });
+  window.addEventListener("hashchange", () => route());
+  route();
+
+  const fmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Manila" });
+  const tick = () => { document.getElementById("clock").textContent = "Iloilo " + fmt.format(new Date()); };
+  tick(); setInterval(tick, 30000);
+</script>
+</body>
+</html>
